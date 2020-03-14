@@ -41,7 +41,7 @@ public class MinimalExample : MonoBehaviour
 ```
 
 ### Without Presets
-If you need more options, than provided by presets, you need to create an instance of some shake class and pass it into the `CameraShaker.Shake`. The example below is for `PerlinShake`.
+If you need more options, than provided by presets, you need to create an instance of some shake class and pass it into the `CameraShaker.Shake`. There are three default shake classes: [PerlinShake](#perlinshake), [BounceShake](#bounceshake) and [KickShake](#kickshake). You can also write your own shakes. The example below is for `PerlinShake`.
 
 ```csharp
 using UnityEngine;
