@@ -6,12 +6,12 @@ Camera shake for Unity.
     * [Setup](#setup)
     * [Using Presets](#using-presets)
     * [Without Presets](#without-presets)
-    * [Writing Custom Shakes](#writing-custom-shakes)
 2. [PerlinShake](#perlinshake)
 2. [BounceShake](#bounceshake)
 2. [KickShake](#kickshake)
 2. [Envelope](#envelope)
 2. [AttenuationParams](#AttenuationParams)
+2. [Writing Custom Shakes](#writing-custom-shakes)
 
 ## Usage
 ### Setup
@@ -72,57 +72,6 @@ public class Grenade : MonoBehaviour
     public void Explode(float explosionStrength, PerlinShake.Params shakeParams)
     {
         CameraShaker.Shake(new PerlinShake(shakeParams, explosionStrength, transform.position));
-    }
-}
-```
-### Writing Custom Shakes
-`CameraShaker` works with any calss that implements `ICameraShake` interface. 
-
-```csharp
-public interface ICameraShake
-    {
-        // Represents current position and rotation of the camera according to the shake.
-        Displacement CurrentDisplacement { get; }
-
-        // Shake system will dispose the shake on the first frame when this is true.
-        bool IsFinished { get; }
-
-        // CameraShaker calls this when the shake is added to the list of active shakes.
-        void Initialize(Vector3 cameraPosition, Quaternion cameraRotation);
-
-        // CameraShaker calls this every frame on active shakes.
-        void Update(float deltaTime, Vector3 cameraPosition, Quaternion cameraRotation);
-    }
-```
-Here is a basic example of custom shake class.
-```csharp
-public class VeryBadShake : ICameraShake
-{
-    readonly float intensity;
-    readonly float duration;
-    float time;
-
-    public VeryBadShake(float intensity, float duration)
-    {
-        this.intensity = intensity;
-        this.duration = duration;
-    }
-
-    public Displacement CurrentDisplacement { get; private set; }
-
-    public bool IsFinished { get; private set; }
-
-    public void Initialize(Vector3 cameraPosition, Quaternion cameraRotation)
-    {
-    }
-
-    public void Update(float deltaTime, Vector3 cameraPosition, Quaternion cameraRotation)
-    {
-        time += deltaTime;
-        if (time > duration)
-            IsFinished = true;
-        CurrentDisplacement = 
-            new Displacement(Random.insideUnitCircle * intensity, Vector3.zero);
     }
 }
 ```
@@ -291,4 +240,57 @@ public class Vibrator : MonoBehaviour
 | falloffScale     | How fast strength falls with distance. |
 | falloffDegree     | Power of the falloff function. |
 | axesMultiplier     | Contribution of each axis to distance. E. g. (1, 1, 0) for a 2D game in XY plane. |
+
+## Writing Custom Shakes
+`CameraShaker` works with any calss that implements `ICameraShake` interface. 
+
+```csharp
+public interface ICameraShake
+    {
+        // Represents current position and rotation of the camera according to the shake.
+        Displacement CurrentDisplacement { get; }
+
+        // Shake system will dispose the shake on the first frame when this is true.
+        bool IsFinished { get; }
+
+        // CameraShaker calls this when the shake is added to the list of active shakes.
+        void Initialize(Vector3 cameraPosition, Quaternion cameraRotation);
+
+        // CameraShaker calls this every frame on active shakes.
+        void Update(float deltaTime, Vector3 cameraPosition, Quaternion cameraRotation);
+    }
+```
+Here is a basic example of custom shake class.
+```csharp
+public class VeryBadShake : ICameraShake
+{
+    readonly float intensity;
+    readonly float duration;
+    float time;
+
+    public VeryBadShake(float intensity, float duration)
+    {
+        this.intensity = intensity;
+        this.duration = duration;
+    }
+
+    public Displacement CurrentDisplacement { get; private set; }
+
+    public bool IsFinished { get; private set; }
+
+    public void Initialize(Vector3 cameraPosition, Quaternion cameraRotation)
+    {
+    }
+
+    public void Update(float deltaTime, Vector3 cameraPosition, Quaternion cameraRotation)
+    {
+        time += deltaTime;
+        if (time > duration)
+            IsFinished = true;
+        CurrentDisplacement = 
+            new Displacement(Random.insideUnitCircle * intensity, Vector3.zero);
+    }
+}
+```
+
 
