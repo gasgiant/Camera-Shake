@@ -172,6 +172,7 @@ Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes
 | sourcePosition | | World position of the source of the shake. |
 | manualStrengthControl| false | Play shake once automatically. |
 |  | true| Manually control strength over time. |
+
 For more details on `maxAmplitude` and `manualStrengthControl` see [Envelope](#envelope).
 
 ### Params
@@ -186,7 +187,7 @@ For more details on `maxAmplitude` and `manualStrengthControl` see [Envelope](#e
 For more details on `envelope` see [Envelope](#envelope). For more details on `attenuation` see [AttenuationParams](#attenuationparams).
 
 ## BounceShake
-`BounceShake` is good for small impacts, for emphasizing more abstract actions, like an attack in a card game. Unlike noise based shake, It provides precise control over the movement of the camera.
+`BounceShake` is useful for short and precise shakes. Unlike noise based shakes, it will provide reliable shake strength.
 
 ### Constructors
 
@@ -219,7 +220,35 @@ Creates `BounceShake` with random initial direction.
 
 
 ## KickShake
-Under construction.
+Makes one kick in specified direction. Useful for recoil.
+
+### Constructors
+
+#### KickShake (first overload)
+| Parameter        | Description | 
+| :------------- |:-------------|
+| parameters     | Parameters of the shake. |
+| direction     | Direction of the kick. |
+
+#### KickShake (second overload)
+Creates an instance of KickShake in the direction from the source to the camera.
+| Parameter        | Description | 
+| :------------- |:-------------|
+| parameters     | Parameters of the shake. |
+| sourcePosition     | World position of the source of the shake. |
+| attenuateStrength     | Change strength depending on distance from the camera? |
+
+### Params
+| Parameter        | Description | 
+| :------------- |:-------------|
+| strength     | Strength of the shake for each axis. |
+| attackTime     | How long it takes to move forward. |
+| attackCurve     | Forward motion curve. |
+| releaseTime     | How long it takes to move back. |
+| releaseCurve     | Back motion curve. |
+| attenuation     | How strength falls with distance from the shake source. |
+
+ For more details on `attenuation` see [AttenuationParams](#attenuationparams).
 
 ## Envelope
 Class `Envelope` controls amplitude of the shake over time. It can work in two modes. In automatic mode it plays the shake ones with selected `maxAmplitude`. 
