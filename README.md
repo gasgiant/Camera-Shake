@@ -10,6 +10,8 @@ Camera shake for Unity.
 2. [PerlinShake](#perlinshake)
 2. [BounceShake](#bounceshake)
 2. [KickShake](#kickshake)
+2. [Envelope](#envelope)
+2. [AttenuationParams](#AttenuationParams)
 
 ## Usage
 ### Setup
@@ -160,10 +162,104 @@ Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes
 | duration     | Duration of the shake.|
 
 ## PerlinShake
-Under construction.
+`PerlinShake` is supposed to imitate more natural looking vibrations. It’s useful for things like explosions, big collisions, loud low frequency sounds. The idea is to get random, but continuous positions and rotations from layers of perlin noise with different frequencies.
+### Constructor
+
+| Parameter        |   |  Description | 
+| :------------- |:-------------|:-------------|
+| parameters     | | Parameters of the shake. |
+| maxAmplitude     | | Maximum amplitude of the shake.|
+| sourcePosition | | World position of the source of the shake. |
+| manualStrengthControl| false | Play shake once automatically. |
+|  | true| Manually control strength over time. |
+For more details on `maxAmplitude` and `manualStrengthControl` see [Envelope](#envelope).
+
+### Params
+
+| Parameter        | Description | 
+| :------------- |:-------------|
+| strength     | Strength of the shake for each axis. |
+| noiseModes     | Layers of perlin noise with different frequencies. |
+| envelope     | Strength of the shake over time. |
+| attenuation     | How strength falls with distance from the shake source. |
+
+For more details on `envelope` see [Envelope](#envelope). For more details on `attenuation` see [AttenuationParams](#attenuationparams).
 
 ## BounceShake
-Under construction.
+`BounceShake` is good for small impacts, for emphasizing more abstract actions, like an attack in a card game. Unlike noise based shake, It provides precise control over the movement of the camera.
+
+### Constructors
+
+#### BounceShake (first overload)
+| Parameter        | Description | 
+| :------------- |:-------------|
+| parameters     | Parameters of the shake. |
+| initialDirection     | Initial direction of the shake motion. |
+| sourcePosition     | World position of the source of the shake. |
+
+#### BounceShake (second overload)
+Creates `BounceShake` with random initial direction.
+| Parameter        | Description | 
+| :------------- |:-------------|
+| parameters     | Parameters of the shake. |
+| sourcePosition     | World position of the source of the shake. |
+
+### Params
+| Parameter        | Description | 
+| :------------- |:-------------|
+| positionStrength     | Parameters of the shake. |
+| rotationStrength     | Strength of the shake for rotational axes. |
+| axesMultiplier     | Preferred direction of shaking. |
+| freq     | Frequency of shaking. |
+| numBounces     | Number of vibrations before stop. |
+| randomness     | Randomness of motion. |
+| attenuation     | How strength falls with distance from the shake source. |
+
+ For more details on `attenuation` see [AttenuationParams](#attenuationparams).
+
 
 ## KickShake
 Under construction.
+
+## Envelope
+Class `Envelope` controls amplitude of the shake over time. It can work in two modes. In automatic mode it plays the shake ones with selected `maxAmplitude`. 
+
+In manual mode you can keep the reference to the `PerlinShake` and change amplitude whenever you like.
+```csharp
+public class Vibrator : MonoBehaviour
+{
+    [SerializeField]
+    PerlinShake.Params params;
+    PerlinShake shake;
+
+    private void Start()
+    {
+        shake = new PerlinShake(params);
+        CameraShaker.Shake(shake);
+    }
+
+    public void Vibrate(float amplitude)
+    {
+        shake.AmplitudeController.SetTargetAmplitude(amplitude);
+    }
+}
+```
+
+### EnvelopeParams
+[See interactive demonstration.](https://www.desmos.com/calculator/javvxu5shq)
+| Parameter        | Description | 
+| :------------- |:-------------|
+| attack     | How fast the amplitude increases. |
+| sustain     | How long in seconds the amplitude holds maximum value. |
+| decay     | How fast the amplitude decreases. |
+| degree     | Power in which the amplitude is raised to get intensity. |
+
+## AttenuationParams
+[See interactive demonstration.](https://www.desmos.com/calculator/njc2aofjsi)
+| Parameter        | Description | 
+| :------------- |:-------------|
+| clippingDistance     | Radius in which shake doesn't lose strength. |
+| falloffScale     | How fast strength falls with distance. |
+| falloffDegree     | Power of the falloff function. |
+| axesMultiplier     | Contribution of each axis to distance. E. g. (1, 1, 0) for a 2D game in XY plane. |
+

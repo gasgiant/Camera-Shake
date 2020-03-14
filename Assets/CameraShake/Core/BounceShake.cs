@@ -99,9 +99,9 @@ namespace CameraShake
             public float rotationStrength = 0.1f;
 
             /// <summary>
-            /// Use for setting preferred direction of shaking. <para>E. g. (1, 0, 0), (0, 0, 0) for horizontal positional shake.</para>
+            /// Preferred direction of shaking.
             /// </summary>
-            [Tooltip("Use for setting preferred direction of shaking. \n\nE. g. (1, 0, 0), (0, 0, 0) for horizontal positional shake.")]
+            [Tooltip("Preferred direction of shaking.")]
             public Displacement axesMultiplier = new Displacement(Vector2.one, Vector3.forward);
 
             /// <summary>
