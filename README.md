@@ -1,14 +1,14 @@
 # Camera-Shake
 Camera shake for Unity. 
 
-## Minimal example
+## Usage
+### Minimal example
 
 1. Make the camera a child of another gameobject. When you want to move the camera move the parent. 
 
 2. Add `CameraShaker` component to the camera gameobject. 
 
 3. Call `CameraShaker.Presets.Explosion2D` to start a shake. Don't forget to add `CameraShake` namespace.
-
 ```csharp
 using UnityEngine;
 using CameraShake;
@@ -23,7 +23,7 @@ public class MinimalExample : MonoBehaviour
     }
 }
 ```
-## Presets
+### One-liners
 
 Class `CameraShakePresets` allows to generate useful shake types with one line of code. You can use it like in the example above. 
 
@@ -59,4 +59,23 @@ Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes
 | rotationStrength     | Strength of rotation in Z axis.|
 | duration     | Duration of the shake.|
 
+## More control
+If you want to have more control over your shakes, here is how you can do it.
+```csharp
+using UnityEngine;
+using CameraShake;
 
+public class Gun : MonoBehaviour
+{
+    public PerlinShake.Params shakeParams;
+
+    public void Shoot()
+    {
+        // Shooting ...
+
+        CameraShaker.Shake(new PerlinShake(shakeParams));
+    }
+}
+```
+
+![shakeparams](https://i.imgur.com/GBwfl1y.png "Shake Params Inspector")
