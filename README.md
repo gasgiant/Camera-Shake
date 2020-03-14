@@ -5,8 +5,8 @@ Camera shake for Unity.
 1. [Usage](##usage)
     * [Setup](#setup)
     * [Using Presets](#using-presets)
-    * [Without presets](#without-presets)
-    * [Writing custom shakes](#writing-custom-shakes)
+    * [Without Presets](#without-presets)
+    * [Writing Custom Shakes](#writing-custom-shakes)
 2. [Presets](##presets)
 
 ## Usage
@@ -36,7 +36,7 @@ public class MinimalExample : MonoBehaviour
 }
 ```
 
-### Without presets
+### Without Presets
 If you need more options, than provided by presets, you need to create an instance of some shake class and pass it into the `CameraShaker.Shake`. The example below is for `PerlinShake`.
 
 ```csharp
@@ -71,7 +71,7 @@ public class Grenade : MonoBehaviour
     }
 }
 ```
-### Writing custom shakes
+### Writing Custom Shakes
 `CameraShaker` works with any calss that implements `ICameraShake` interface. 
 
 ```csharp
