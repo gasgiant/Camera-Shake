@@ -25,7 +25,7 @@ public class MinimalExample : MonoBehaviour
 ```
 ### One-liners
 
-Class `CameraShakePresets` allows to generate useful shake types with one line of code. You can use it like in the example above. 
+Class `CameraShakePresets` allows to generate common shake types with one line of code. You can use it like in the example above. 
 
 __ShortShake3D__  
 Suitable for short and snappy shakes in 3D. Rotates camera in all three axes. Uses `BounceShake` algorithm.
@@ -59,8 +59,9 @@ Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes
 | rotationStrength     | Strength of rotation in Z axis.|
 | duration     | Duration of the shake.|
 
-## More control
-If you want to have more control over your shakes, here is how you can do it.
+### Getting more control
+If you need more options, than provided by presets, you need to create an instance of some shake class and pass it into the `CameraShaker.Shake`. The example below is for `PerlinShake`.
+
 ```csharp
 using UnityEngine;
 using CameraShake;
@@ -77,5 +78,6 @@ public class Gun : MonoBehaviour
     }
 }
 ```
+The constructor of `PerlinShake` teakes instance of `PerlinShake.Params` as an input. You can expose the parameter variable on some `MonoBehaviour` or `ScriptableObject` to tweak the parameters in the inspector.
 
-![shakeparams](https://i.imgur.com/GBwfl1y.png "Shake Params Inspector")
+![shakeparams](https://i.imgur.com/TLsOKIA.png "Shake Params Inspector")
