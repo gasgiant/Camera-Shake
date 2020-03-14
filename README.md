@@ -1,13 +1,21 @@
 # Camera-Shake
 Camera shake for Unity. 
 
+## Table of Contents
+1. [Usage](##usage)
+    * [Setup](#setup)
+    * [Using Presets](#using-presets)
+    * [Without presets](#without-presets)
+    * [Writing custom shakes](#writing-custom-shakes)
+2. [Presets](##presets)
+
 ## Usage
 ### Setup
 1. Make the camera a child of another gameobject. When you want to move the camera move the parent. 
 
 2. Add `CameraShaker` component to the camera gameobject. 
 
-By default `CameraShaker` works with the transform of its gameobject. Alternatively, you can add `CameraShaker` to any gameobject you like and set it's `cameraTransform` field in inspector, or by calling `CameraShaker.Instance.SetCameraTransform`.
+By default `CameraShaker` works with its own transform. Alternatively, you can add `CameraShaker` to any gameobject you like and set it's `cameraTransform` field in inspector, or by calling `CameraShaker.Instance.SetCameraTransform`.
 
 ### Using Presets
 The simplest way to shake the camera is to use presets. Class `CameraShakePresets` allows to generate some common shake types with one line of code.
