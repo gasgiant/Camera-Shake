@@ -9,17 +9,22 @@ namespace CameraShake
     public class CameraShaker : MonoBehaviour
     {
         public static CameraShaker Instance;
+        public static CameraShakePresets Presets;
 
         readonly List<ICameraShake> activeShakes = new List<ICameraShake>();
 
         [Tooltip("Transform which will be affected by the shakes.\n\nCameraShaker will set this transform's local position and rotation.")]
         [SerializeField]
         Transform cameraTransform;
+        
 
         [Tooltip("Scales the strength of all shakes.")]
         [Range(0, 1)]
         [SerializeField]
         public float StrengthMultiplier = 1;
+
+        public CameraShakePresets ShakePresets;
+
 
         /// <summary>
         /// Adds a shake to the list of active shakes.
@@ -27,25 +32,36 @@ namespace CameraShake
         public static void Shake(ICameraShake shake)
         {
             if (IsInstanceNull()) return;
-            shake.Initialize(Instance.cameraTransform.position,
-                Instance.cameraTransform.rotation);
-            Instance.activeShakes.Add(shake);
+            Instance.RegisterShake(shake);
+        }
+
+        /// <summary>
+        /// Adds a shake to the list of active shakes.
+        /// </summary>
+        public void RegisterShake(ICameraShake shake)
+        {
+            shake.Initialize(cameraTransform.position,
+                cameraTransform.rotation);
+            activeShakes.Add(shake);
         }
 
         /// <summary>
         /// Sets the transform which will be affected by the shakes.
         /// </summary>
-        public static void SetCameraTransform(Transform cameraTransform)
+        public void SetCameraTransform(Transform cameraTransform)
         {
-            if (IsInstanceNull()) return;
             cameraTransform.localPosition = Vector3.zero;
             cameraTransform.localEulerAngles = Vector3.zero;
-            Instance.cameraTransform = cameraTransform;
+            this.cameraTransform = cameraTransform;
         }
 
         private void Awake()
         {
             Instance = this;
+            ShakePresets = new CameraShakePresets(this);
+            Presets = ShakePresets;
+            if (cameraTransform == null)
+                cameraTransform = transform;
         }
 
         private void Update()

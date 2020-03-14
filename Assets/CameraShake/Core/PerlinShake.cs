@@ -20,7 +20,8 @@ namespace CameraShake
         /// <param name="maxAmplitude">Maximum amplitude of the shake.</param>
         /// <param name="sourcePosition">World position of the source of the shake.</param>
         /// <param name="manualStrengthControl">Pass true if you want to control amplitude manually.</param>
-        public PerlinShake(Params parameters,
+        public PerlinShake(
+            Params parameters,
             float maxAmplitude = 1,
             Vector3? sourcePosition = null,
             bool manualStrengthControl = false)
