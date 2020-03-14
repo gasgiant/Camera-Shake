@@ -64,7 +64,7 @@ The constructor of `PerlinShake` takes an instance of `PerlinShake.Params` as an
 
 ![shakeparams](https://i.imgur.com/TLsOKIA.png "PerlinShake.Params Inspector")
 
-Shakes can have more options in their constructors. For example you can pass position of the source of the explosion into the `PerlinShake` constructor, and the shake will change the strength based on the distance from the source to the camera.
+Shakes can have more options in their constructors. For example you can pass position of the source of the explosion into the `PerlinShake` constructor, and the shake will change the strength depending on the distance from the source to the camera.
 
 ```csharp
 public class Grenade : MonoBehaviour
