@@ -12,6 +12,7 @@ namespace CameraShake
         Vector2[] seeds;
         float time;
         Vector3? sourcePosition;
+        float norm;
 
         /// <summary>
         /// Creates an instance of PerlinShake.
@@ -40,9 +41,11 @@ namespace CameraShake
         public void Initialize(Vector3 cameraPosition, Quaternion cameraRotation)
         {
             seeds = new Vector2[pars.noiseModes.Length];
+            norm = 0;
             for (int i = 0; i < seeds.Length; i++)
             {
                 seeds[i] = Random.insideUnitCircle * 20;
+                norm += pars.noiseModes[i].amplitude;
             }
         }
 
@@ -59,7 +62,7 @@ namespace CameraShake
             Displacement disp = Displacement.Zero;
             for (int i = 0; i < pars.noiseModes.Length; i++)
             {
-                disp += pars.noiseModes[i].amplitude *
+                disp += pars.noiseModes[i].amplitude / norm *
                     SampleNoise(seeds[i], pars.noiseModes[i].freq);
             }
 
