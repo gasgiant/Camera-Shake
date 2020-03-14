@@ -48,7 +48,7 @@ public class Gun : MonoBehaviour
     }
 }
 ```
-The constructor of `PerlinShake` tekes an instance of `PerlinShake.Params` as an input. You can expose the parameter variable on some `MonoBehaviour` or `ScriptableObject` to tweak the parameters in the inspector.
+The constructor of `PerlinShake` takes an instance of `PerlinShake.Params` as an input. You can expose the parameter variable on some `MonoBehaviour` or `ScriptableObject` to tweak the parameters in the inspector.
 
 ![shakeparams](https://i.imgur.com/TLsOKIA.png "PerlinShake.Params Inspector")
 
@@ -64,7 +64,7 @@ public class Grenade : MonoBehaviour
 }
 ```
 ### Writing custom shakes
-`CameraShaker` works with any calss, that implements `ICameraShake` interface. 
+`CameraShaker` works with any calss that implements `ICameraShake` interface. 
 
 ```csharp
 public interface ICameraShake
@@ -73,15 +73,12 @@ public interface ICameraShake
         Displacement CurrentDisplacement { get; }
 
         // Shake system will dispose the shake on the first frame when this is true.
-
         bool IsFinished { get; }
 
         // CameraShaker calls this when the shake is added to the list of active shakes.
-
         void Initialize(Vector3 cameraPosition, Quaternion cameraRotation);
 
         // CameraShaker calls this every frame on active shakes.
-
         void Update(float deltaTime, Vector3 cameraPosition, Quaternion cameraRotation);
     }
 ```
