@@ -2,12 +2,14 @@
 Camera shake for Unity. 
 
 ## Table of Contents
-1. [Usage](##usage)
+1. [Usage](#usage)
     * [Setup](#setup)
     * [Using Presets](#using-presets)
     * [Without Presets](#without-presets)
     * [Writing Custom Shakes](#writing-custom-shakes)
-2. [Presets](##presets)
+2. [PerlinShake](#perlinshake)
+2. [BounceShake](#bounceshake)
+2. [KickShake](#kickshake)
 
 ## Usage
 ### Setup
@@ -156,3 +158,12 @@ Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes
 | positionStrength     | Strength of motion in X and Y axes.|
 | rotationStrength     | Strength of rotation in Z axis.|
 | duration     | Duration of the shake.|
+
+## PerlinShake
+Under construction.
+
+## BounceShake
+Under construction.
+
+## KickShake
+Under construction.
