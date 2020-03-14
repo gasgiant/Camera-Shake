@@ -30,7 +30,7 @@ Class `CameraShakePresets` allows to generate useful shake types with one line o
 __ShortShake3D__  
 Suitable for short and snappy shakes in 3D. Rotates camera in all three axes. Uses `BounceShake` algorithm.
 | Parameter        | Description | 
-| ------------- |:-------------|
+| :------------- |:-------------|
 | strength     | Strength of the shake.|
 | freq     | Frequency of shaking.|
 | numBounces     | Number of vibrations before stop.|
@@ -38,7 +38,7 @@ Suitable for short and snappy shakes in 3D. Rotates camera in all three axes. Us
 __ShortShake2D__  
 Suitable for short and snappy shakes in 2D. Moves camera in it's X and Y axes and rotates it in Z axis. Uses `BounceShake` algorithm.
 | Parameter        | Description | 
-| ------------- |:-------------|
+| :------------- |:-------------|
 | positionStrength     | Strength of motion in X and Y axes.|
 | rotationStrength     | Strength of rotation in Z axis.|
 | freq     | Frequency of shaking.|
@@ -47,14 +47,14 @@ Suitable for short and snappy shakes in 2D. Moves camera in it's X and Y axes an
 __Explosion3D__  
 Suitable for longer and stronger shakes in 3D. Rotates camera in all three axes. Uses `PerlinShake` algorithm.
 | Parameter        | Description | 
-| ------------- |:-------------|
+| :------------- |:-------------|
 | strength     | Strength of the shake.|
 | duration     | Duration of the shake.|
 
 __Explosion2D__  
 Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes and rotates it in Z axis. Uses `PerlinShake` algorithm.
 | Parameter        | Description | 
-| ------------- |:-------------|
+| :------------- |:-------------|
 | positionStrength     | Strength of motion in X and Y axes.|
 | rotationStrength     | Strength of rotation in Z axis.|
 | duration     | Duration of the shake.|
