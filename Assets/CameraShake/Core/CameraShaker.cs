@@ -77,9 +77,7 @@ namespace CameraShake
                 }
                 else
                 {
-                    activeShakes[i].Update(Time.deltaTime,
-                        Instance.cameraTransform.position,
-                        Instance.cameraTransform.rotation);
+                    activeShakes[i].Update(Time.deltaTime, cameraTransform.position, cameraTransform.rotation);
                     cameraDisplacement += activeShakes[i].CurrentDisplacement;
                 }
             }
