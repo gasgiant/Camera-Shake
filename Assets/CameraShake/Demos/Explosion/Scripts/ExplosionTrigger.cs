@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 
-// Don't forget to add this
+// Don't forget to add this.
 using CameraShake;
 
-public class ExampleController2d : MonoBehaviour
+public class ExplosionTrigger : MonoBehaviour
 {
-    // Parameters of the shake to tweak in the inspector
+    // Parameters of the shake to tweak in the inspector.
     public PerlinShake.Params shakeParams;
 
     private void Update()
@@ -14,7 +14,7 @@ public class ExampleController2d : MonoBehaviour
         {
             FindObjectOfType<Explosion>().Explode();
 
-            // Making camera shake
+            // Creating new instance of a shake and registering it in the system.
             CameraShaker.Shake(new PerlinShake(shakeParams));
         }
     }
