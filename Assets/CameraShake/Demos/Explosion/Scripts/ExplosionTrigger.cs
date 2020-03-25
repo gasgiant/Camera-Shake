@@ -5,8 +5,6 @@ using CameraShake;
 
 public class ExplosionTrigger : MonoBehaviour
 {
-    // Parameters of the shake to tweak in the inspector.
-    public PerlinShake.Params shakeParams;
 
     private void Update()
     {
@@ -14,8 +12,8 @@ public class ExplosionTrigger : MonoBehaviour
         {
             FindObjectOfType<Explosion>().Explode();
 
-            // Creating new instance of a shake and registering it in the system.
-            CameraShaker.Shake(new PerlinShake(shakeParams));
+            // Shaking the camera.
+            CameraShaker.Presets.ShortShake2D();
         }
     }
 }
