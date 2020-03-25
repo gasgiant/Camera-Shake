@@ -1,16 +1,24 @@
 # Camera-Shake
-Camera shake for Unity. 
+An asset for camera shake in Unity. 
+
+Features:
+* One line of code shakes with [presets](#using-presets)
+* Several shake algorithms suitable for a wide range of use cases
+* Change strength and direction of the shake depending on  
+position of the shake source
+* Easy to write custom shakes
 
 ## Table of Contents
 1. [Usage](#usage)
     * [Setup](#setup)
     * [Using Presets](#using-presets)
     * [Without Presets](#without-presets)
+2. [Presets](#presets)
 2. [PerlinShake](#perlinshake)
 2. [BounceShake](#bounceshake)
 2. [KickShake](#kickshake)
-2. [Envelope](#envelope)
-2. [AttenuationParams](#AttenuationParams)
+2. [Time Envelope](#time-envelope)
+2. [Spatial Attenuation](#spatial-attenuation)
 2. [Writing Custom Shakes](#writing-custom-shakes)
 
 ## Usage
@@ -41,7 +49,7 @@ public class MinimalExample : MonoBehaviour
 ```
 
 ### Without Presets
-If you need more options, than provided by presets, you need to create an instance of some shake class and pass it into the `CameraShaker.Shake`. There are three default shake classes: [PerlinShake](#perlinshake), [BounceShake](#bounceshake) and [KickShake](#kickshake). You can also write your own shakes. The example below is for `PerlinShake`.
+If you need more options, than provided by presets, you need to create an instance of some shake class and pass it into the `CameraShaker.Shake`. There are three default shake classes: [PerlinShake](#perlinshake), [BounceShake](#bounceshake) and [KickShake](#kickshake). You can also write [your own](#writing-custom-shakes) shakes. The example below is for `PerlinShake`.
 
 ```csharp
 using UnityEngine;
@@ -60,7 +68,7 @@ public class Gun : MonoBehaviour
     }
 }
 ```
-The constructor of `PerlinShake` takes an instance of `PerlinShake.Params` as an input. You can expose the parameter variable on some `MonoBehaviour` or `ScriptableObject` to tweak the parameters in the inspector.
+The constructor of `PerlinShake` takes an instance of `PerlinShake.Params` as an input. You can expose the parameters variable on some `MonoBehaviour` or `ScriptableObject` to tweak the parameters in the inspector.
 
 ![shakeparams](https://i.imgur.com/TLsOKIA.png "PerlinShake.Params Inspector")
 
@@ -111,7 +119,7 @@ Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes
 | duration     | Duration of the shake.|
 
 ## PerlinShake
-`PerlinShake` combines layers of Perlin noise with different frequencies. Works better for longer shakes. For very short shakes consider using `BounceShake`.
+`PerlinShake` combines layers of Perlin noise with different frequencies to create smooth and nuanced shake. Works better for longer shakes. For very short shakes consider using `BounceShake`.
 ### Constructor
 
 | Parameter        |   |  Description | 
@@ -122,7 +130,7 @@ Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes
 | manualStrengthControl| false | Play shake once automatically. |
 |  | true| Manually control strength over time. |
 
-For more details on `maxAmplitude` and `manualStrengthControl` see [Envelope](#envelope).
+For more details on `maxAmplitude` and `manualStrengthControl` see [Time Envelope](#time-envelope).
 
 ### Params
 
@@ -133,7 +141,7 @@ For more details on `maxAmplitude` and `manualStrengthControl` see [Envelope](#e
 | envelope     | Strength of the shake over time. |
 | attenuation     | How strength falls with distance from the shake source. |
 
-For more details on `envelope` see [Envelope](#envelope). For more details on `attenuation` see [AttenuationParams](#attenuationparams).
+For more details on `envelope` see [Time Envelope](#time-envelope). For more details on `attenuation` see [Spatial attenuation](#spatial-attenuation).
 
 ## BounceShake
 `BounceShake` is useful for short and precise shakes. Unlike `PerlinShake`, it will provide reliable shake strength. Consider using `PerlinShake` for longer and stronger shakes.
@@ -165,7 +173,7 @@ Creates `BounceShake` with random initial direction.
 | randomness     | Randomness of motion. |
 | attenuation     | How strength falls with distance from the shake source. |
 
- For more details on `attenuation` see [AttenuationParams](#attenuationparams).
+ For more details on `attenuation` see [Spatial attenuation](#spatial-attenuation).
 
 
 ## KickShake
@@ -197,9 +205,9 @@ Creates an instance of KickShake in the direction from the source to the camera.
 | releaseCurve     | Back motion curve. |
 | attenuation     | How strength falls with distance from the shake source. |
 
- For more details on `attenuation` see [AttenuationParams](#attenuationparams).
+ For more details on `attenuation` see [Spatial attenuation](#spatial-attenuation).
 
-## Envelope
+## Time Envelope
 Class `Envelope` controls amplitude of the shake over time. It can work in two modes. In automatic mode it plays the shake ones with selected `maxAmplitude`. 
 
 In manual mode you can keep the reference to the `PerlinShake` and change amplitude whenever you like.
@@ -224,7 +232,7 @@ public class Vibrator : MonoBehaviour
 ```
 
 ### EnvelopeParams
-[See interactive demonstration.](https://www.desmos.com/calculator/javvxu5shq)
+[See interactive demonstration.](https://www.desmos.com/calculator/e9wxr78uu2)
 | Parameter        | Description | 
 | :------------- |:-------------|
 | attack     | How fast the amplitude increases. |
@@ -232,8 +240,12 @@ public class Vibrator : MonoBehaviour
 | decay     | How fast the amplitude decreases. |
 | degree     | Power in which the amplitude is raised to get intensity. |
 
-## AttenuationParams
-[See interactive demonstration.](https://www.desmos.com/calculator/njc2aofjsi)
+## Spatial Attenuation
+
+Class `Attenuator` provides methods for changing strength and direction of the shake depending on position of the shake source relative to the camera.
+
+### StrengthAttenuationParams
+[See interactive demonstration.](https://www.desmos.com/calculator/iivcfrotk8)
 | Parameter        | Description | 
 | :------------- |:-------------|
 | clippingDistance     | Radius in which shake doesn't lose strength. |
@@ -260,7 +272,7 @@ public interface ICameraShake
         void Update(float deltaTime, Vector3 cameraPosition, Quaternion cameraRotation);
     }
 ```
-Here is a basic example of custom shake class.
+Here is a basic example of a custom shake class.
 ```csharp
 public class VeryBadShake : ICameraShake
 {
