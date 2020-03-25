@@ -111,7 +111,7 @@ Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes
 | duration     | Duration of the shake.|
 
 ## PerlinShake
-`PerlinShake` is supposed to imitate more natural looking vibrations. It’s useful for things like explosions, big collisions, loud low frequency sounds. The idea is to get random, but continuous positions and rotations from layers of perlin noise with different frequencies.
+`PerlinShake` combines layers of Perlin noise with different frequencies. Works better for longer shakes. For very short shakes consider using `BounceShake`.
 ### Constructor
 
 | Parameter        |   |  Description | 
@@ -129,14 +129,14 @@ For more details on `maxAmplitude` and `manualStrengthControl` see [Envelope](#e
 | Parameter        | Description | 
 | :------------- |:-------------|
 | strength     | Strength of the shake for each axis. |
-| noiseModes     | Layers of perlin noise with different frequencies. |
+| noiseModes     | Layers of Perlin noise with different frequencies. |
 | envelope     | Strength of the shake over time. |
 | attenuation     | How strength falls with distance from the shake source. |
 
 For more details on `envelope` see [Envelope](#envelope). For more details on `attenuation` see [AttenuationParams](#attenuationparams).
 
 ## BounceShake
-`BounceShake` is useful for short and precise shakes. Unlike noise based shakes, it will provide reliable shake strength.
+`BounceShake` is useful for short and precise shakes. Unlike `PerlinShake`, it will provide reliable shake strength. Consider using `PerlinShake` for longer and stronger shakes.
 
 ### Constructors
 
@@ -242,7 +242,7 @@ public class Vibrator : MonoBehaviour
 | axesMultiplier     | Contribution of each axis to distance. E. g. (1, 1, 0) for a 2D game in XY plane. |
 
 ## Writing Custom Shakes
-`CameraShaker` works with any calss that implements `ICameraShake` interface. 
+`CameraShaker` works with any class that implements `ICameraShake` interface. 
 
 ```csharp
 public interface ICameraShake
