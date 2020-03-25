@@ -141,7 +141,7 @@ For more details on `maxAmplitude` and `manualStrengthControl` see [Time Envelop
 | envelope     | Strength of the shake over time. |
 | attenuation     | How strength falls with distance from the shake source. |
 
-For more details on `envelope` see [Time Envelope](#time-envelope). For more details on `attenuation` see [Spatial attenuation](#spatial-attenuation).
+For more details on `envelope` see [Time Envelope](#time-envelope). For more details on `attenuation` see [Spatial Attenuation](#spatial-attenuation).
 
 ## BounceShake
 `BounceShake` is useful for short and precise shakes. Unlike `PerlinShake`, it will provide reliable shake strength. Consider using `PerlinShake` for longer and stronger shakes.
@@ -173,7 +173,7 @@ Creates `BounceShake` with random initial direction.
 | randomness     | Randomness of motion. |
 | attenuation     | How strength falls with distance from the shake source. |
 
- For more details on `attenuation` see [Spatial attenuation](#spatial-attenuation).
+ For more details on `attenuation` see [Spatial Attenuation](#spatial-attenuation).
 
 
 ## KickShake
@@ -205,7 +205,7 @@ Creates an instance of KickShake in the direction from the source to the camera.
 | releaseCurve     | Back motion curve. |
 | attenuation     | How strength falls with distance from the shake source. |
 
- For more details on `attenuation` see [Spatial attenuation](#spatial-attenuation).
+ For more details on `attenuation` see [Spatial Attenuation](#spatial-attenuation).
 
 ## Time Envelope
 Class `Envelope` controls amplitude of the shake over time. It can work in two modes. In automatic mode it plays the shake ones with selected `maxAmplitude`. 
