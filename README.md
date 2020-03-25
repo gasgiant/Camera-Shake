@@ -1,8 +1,8 @@
-# Camera-Shake
+# GG-CameraShake
 An asset for camera shake in Unity. 
 
-Features:
-* One line of code shakes with [presets](#using-presets)
+__Features__:
+* One line of code shakes with presets
 * Several shake algorithms suitable for a wide range of use cases
 * Change strength and direction of the shake depending on  
 position of the shake source
