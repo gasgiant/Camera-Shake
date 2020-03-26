@@ -59,7 +59,7 @@ namespace CameraShake
         }
 
         /// <summary>
-        /// Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes and rotates it in Z axis.
+        /// Suitable for longer and stronger shakes in 2D. Moves camera in X and Y axes and rotates it in Z axis.
         /// </summary>
         /// <param name="positionStrength">Strength of motion in X and Y axes.</param>
         /// <param name="rotationStrength">Strength of rotation in Z axis.</param>
