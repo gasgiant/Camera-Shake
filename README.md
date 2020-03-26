@@ -95,7 +95,7 @@ Suitable for short and snappy shakes in 3D. Rotates camera in all three axes. Us
 | numBounces     | Number of vibrations before stop.|
 
 __ShortShake2D__  
-Suitable for short and snappy shakes in 2D. Moves camera in it's X and Y axes and rotates it in Z axis. Uses `BounceShake` algorithm.
+Suitable for short and snappy shakes in 2D. Moves camera in X and Y axes and rotates it in Z axis. Uses `BounceShake` algorithm.
 | Parameter        | Description | 
 | :------------- |:-------------|
 | positionStrength     | Strength of motion in X and Y axes.|
@@ -111,7 +111,7 @@ Suitable for longer and stronger shakes in 3D. Rotates camera in all three axes.
 | duration     | Duration of the shake.|
 
 __Explosion2D__  
-Suitable for longer and stronger shakes in 2D. Moves camera in it's X and Y axes and rotates it in Z axis. Uses `PerlinShake` algorithm.
+Suitable for longer and stronger shakes in 2D. Moves camera in X and Y axes and rotates it in Z axis. Uses `PerlinShake` algorithm.
 | Parameter        | Description | 
 | :------------- |:-------------|
 | positionStrength     | Strength of motion in X and Y axes.|
