@@ -8,6 +8,9 @@ __Features__:
 position of the shake source
 * Easy to write custom shakes
 
+[__Watch video tutorial__](https://youtu.be/fn3hIPLbSn8)
+![Thumbnail](https://i.imgur.com/n0ndQ9x.png "Video thumbnail")
+
 ## Table of Contents
 1. [Usage](#usage)
     * [Setup](#setup)
