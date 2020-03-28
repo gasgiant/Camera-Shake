@@ -12,7 +12,8 @@ position of the shake source
 ![Thumbnail](https://i.imgur.com/n0ndQ9x.png "Video thumbnail")
 
 ## Table of Contents
-1. [Usage](#usage)
+1. [Installation](#installation)
+2. [Usage](#usage)
     * [Setup](#setup)
     * [Using Presets](#using-presets)
     * [Without Presets](#without-presets)
@@ -23,6 +24,13 @@ position of the shake source
 2. [Time Envelope](#time-envelope)
 2. [Spatial Attenuation](#spatial-attenuation)
 2. [Writing Custom Shakes](#writing-custom-shakes)
+
+## Installation
+1. You can install the package via Package Manager using this URL: `https://github.com/gasgiant/Camera-Shake.git#upm`.
+
+2. Or you can [download](https://github.com/gasgiant/Camera-Shake/releases/download/v1.0.0/ggcamerashake.unitypackage) .unitypackage and import it into your project.
+
+
 
 ## Usage
 ### Setup
