@@ -11,7 +11,9 @@ namespace CameraShake
         public static CameraShaker Instance;
         public static CameraShakePresets Presets;
 
-        readonly List<ICameraShake> activeShakes = new List<ICameraShake>();
+        private const int SHAKE_INITIAL_CAPACITY = 8;
+
+        readonly List<ICameraShake> activeShakes = new List<ICameraShake>(SHAKE_INITIAL_CAPACITY);
 
         [Tooltip("Transform which will be affected by the shakes.\n\nCameraShaker will set this transform's local position and rotation.")]
         [SerializeField]

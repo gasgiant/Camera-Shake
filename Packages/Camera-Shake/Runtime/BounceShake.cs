@@ -4,9 +4,9 @@ namespace CameraShake
 {
     public class BounceShake : ICameraShake
     {
-        readonly Params pars;
+        Params pars;
         readonly AnimationCurve moveCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
-        readonly Vector3? sourcePosition = null;
+        Vector3? sourcePosition = null;
 
         float attenuation = 1;
         Displacement direction;
@@ -14,6 +14,26 @@ namespace CameraShake
         Displacement currentWaypoint;
         int bounceIndex;
         float t;
+
+        public void Reset()
+        {
+            pars = null;
+            sourcePosition = null;
+            attenuation = 1;
+            direction = default;
+            previousWaypoint = default;
+            currentWaypoint = default;
+            bounceIndex = default;
+            t = default;
+
+            CurrentDisplacement = default;
+            IsFinished = default;
+        }
+
+        public BounceShake()
+        {
+
+        }
 
         /// <summary>
         /// Creates an instance of BounceShake.
@@ -35,6 +55,18 @@ namespace CameraShake
         /// <param name="initialDirection">Initial direction of the shake motion.</param>
         /// <param name="sourcePosition">World position of the source of the shake.</param>
         public BounceShake(Params parameters, Displacement initialDirection, Vector3? sourcePosition = null)
+        {
+            Initialize(parameters, initialDirection, sourcePosition);
+        }
+        public void Initialize(Params parameters, Vector3? sourcePosition = null)
+        {
+            this.sourcePosition = sourcePosition;
+            pars = parameters;
+            Displacement rnd = Displacement.InsideUnitSpheres();
+            direction = Displacement.Scale(rnd, pars.axesMultiplier).Normalized;
+        }
+
+        public void Initialize(Params parameters, Displacement initialDirection, Vector3? sourcePosition = null)
         {
             this.sourcePosition = sourcePosition;
             pars = parameters;
@@ -128,6 +160,16 @@ namespace CameraShake
             /// </summary>
             [Tooltip("How strength falls with distance from the shake source.")]
             public Attenuator.StrengthAttenuationParams attenuation;
+
+            public void Reset()
+            {
+                positionStrength = 0.05f;
+                rotationStrength = 0.1f;
+                axesMultiplier = new Displacement(Vector2.one, Vector3.forward);
+                freq = 25f;
+                numBounces = 5;
+                randomness = 0.5f;
+            }
         }
     }
 }

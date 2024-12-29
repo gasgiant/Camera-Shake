@@ -1,0 +1,31 @@
+{
+  "name": "com.gasgiant.camera-shake",
+  "version": "1.0.0",
+  "displayName": "GG Camera Shake",
+  "description": "A package for making camera shake.",
+  "unity": "2018.1",
+
+  "samples": [
+
+    {
+ 
+      "displayName": "Explosion",
+ 
+      "description": "How to shake camera using presets.",
+ 
+      "path": "Samples~/Explosion"
+ 
+    },
+ 
+    {
+ 
+      "displayName": "Stompa",
+ 
+      "description": "How to expose shake params in the inspector and use spatial attenuation.",
+ 
+      "path": "Samples~/Stompa"
+ 
+    }
+ 
+  ]
+}

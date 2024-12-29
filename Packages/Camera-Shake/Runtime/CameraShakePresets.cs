@@ -9,8 +9,17 @@ namespace CameraShake
     {
         readonly CameraShaker shaker;
 
+        private BounceShakePool poolBounceShake;
+        private PerlinShakePool poolPerlinShake;
+
         public CameraShakePresets(CameraShaker shaker)
         {
+            poolBounceShake = new BounceShakePool();
+            poolBounceShake.InitPool();
+
+            poolPerlinShake = new PerlinShakePool();
+            poolPerlinShake.InitPool();
+
             this.shaker = shaker;
         }
 
@@ -27,14 +36,16 @@ namespace CameraShake
             float freq = 25,
             int numBounces = 5)
         {
-            BounceShake.Params pars = new BounceShake.Params
-            {
-                positionStrength = positionStrength,
-                rotationStrength = rotationStrength,
-                freq = freq,
-                numBounces = numBounces
-            };
-            shaker.RegisterShake(new BounceShake(pars));
+            BounceShake.Params pars = poolBounceShake.GetParams();
+            pars.positionStrength = positionStrength;
+            pars.rotationStrength = rotationStrength;
+            pars.freq = freq;
+            pars.numBounces = numBounces;
+
+            BounceShake shake = poolBounceShake.GetShake();
+            shake.Initialize(pars);
+
+            shaker.RegisterShake(shake);
         }
 
         /// <summary>
@@ -48,14 +59,16 @@ namespace CameraShake
             float freq = 25,
             int numBounces = 5)
         {
-            BounceShake.Params pars = new BounceShake.Params
-            {
-                axesMultiplier = new Displacement(Vector3.zero, new Vector3(1, 1, 0.4f)),
-                rotationStrength = strength,
-                freq = freq,
-                numBounces = numBounces
-            };
-            shaker.RegisterShake(new BounceShake(pars));
+            BounceShake.Params pars = poolBounceShake.GetParams();
+            pars.axesMultiplier = new Displacement(Vector3.zero, new Vector3(1, 1, 0.4f));
+            pars.rotationStrength = strength;
+            pars.freq = freq;
+            pars.numBounces = numBounces;
+
+            BounceShake shake = poolBounceShake.GetShake();
+            shake.Initialize(pars);
+
+            shaker.RegisterShake(shake);
         }
 
         /// <summary>
@@ -69,20 +82,22 @@ namespace CameraShake
             float rotationStrength = 3,
             float duration = 0.5f)
         {
-            PerlinShake.NoiseMode[] modes =
-            {
-                new PerlinShake.NoiseMode(8, 1),
-                new PerlinShake.NoiseMode(20, 0.3f)
-            };
+            PerlinShake.NoiseMode noiseMode1 = new PerlinShake.NoiseMode(8, 1);
+            PerlinShake.NoiseMode noiseMode2 = new PerlinShake.NoiseMode(20, 0.3f);
+
             Envelope.EnvelopeParams envelopePars = new Envelope.EnvelopeParams();
             envelopePars.decay = duration <= 0 ? 1 : 1 / duration;
-            PerlinShake.Params pars = new PerlinShake.Params
-            {
-                strength = new Displacement(new Vector3(1, 1) * positionStrength, Vector3.forward * rotationStrength),
-                noiseModes = modes,
-                envelope = envelopePars,
-            };
-            shaker.RegisterShake(new PerlinShake(pars));
+
+            PerlinShake.Params param = poolPerlinShake.GetParams();
+            param.strength = new Displacement(new Vector3(1, 1) * positionStrength, Vector3.forward * rotationStrength);
+            param.envelope = envelopePars;
+            param.noiseModes[0] = noiseMode1;
+            param.noiseModes[1] = noiseMode2;
+
+            PerlinShake shake = poolPerlinShake.GetShake();
+            shake.Initialize(param);
+
+            shaker.RegisterShake(shake);
         }
 
         /// <summary>
@@ -94,20 +109,21 @@ namespace CameraShake
             float strength = 8f,
             float duration = 0.7f)
         {
-            PerlinShake.NoiseMode[] modes =
-            {
-                new PerlinShake.NoiseMode(6, 1),
-                new PerlinShake.NoiseMode(20, 0.2f)
-            };
-            Envelope.EnvelopeParams envelopePars = new Envelope.EnvelopeParams();
+            PerlinShake.NoiseMode noiseMode1 = new PerlinShake.NoiseMode(6, 1);
+            PerlinShake.NoiseMode noiseMode2 = new PerlinShake.NoiseMode(20, 0.2f);
+
+            Envelope.EnvelopeParams envelopePars = poolPerlinShake.GetEnvelopeParams();
             envelopePars.decay = duration <= 0 ? 1 : 1 / duration;
-            PerlinShake.Params pars = new PerlinShake.Params
-            {
-                strength = new Displacement(Vector3.zero, new Vector3(1, 1, 0.5f) * strength),
-                noiseModes = modes,
-                envelope = envelopePars,
-            };
-            shaker.RegisterShake(new PerlinShake(pars));
+
+            PerlinShake.Params param = poolPerlinShake.GetParams();
+            param.strength = new Displacement(Vector3.zero, new Vector3(1, 1, 0.5f) * strength);
+            param.envelope = envelopePars;
+            param.noiseModes[0] = noiseMode1;
+            param.noiseModes[1] = noiseMode2;
+
+            PerlinShake shake = poolPerlinShake.GetShake();
+            shake.Initialize(param);
+            shaker.RegisterShake(shake);
         }
     }
 }

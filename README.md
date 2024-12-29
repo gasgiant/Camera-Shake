@@ -26,7 +26,7 @@ position of the shake source
 2. [Writing Custom Shakes](#writing-custom-shakes)
 
 ## Installation
-1. You can install the package via Package Manager using this URL: `https://github.com/gasgiant/Camera-Shake.git#upm`.
+1. You can install the package via Package Manager using this URL: `https://github.com/StinkySteak/Camera-Shake.git?path=Packages/Camera-Shake`.
 
 2. Or you can [download](https://github.com/gasgiant/Camera-Shake/releases/download/v1.0.0/ggcamerashake.unitypackage) .unitypackage and import it into your project.
 

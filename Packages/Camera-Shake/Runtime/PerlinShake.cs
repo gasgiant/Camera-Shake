@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Security.Cryptography;
+using UnityEngine;
 
 namespace CameraShake
 {
     public class PerlinShake : ICameraShake
     {
-        readonly Params pars;
-        readonly Envelope envelope;
+        Params pars;
+        Envelope envelope;
 
         public IAmplitudeController AmplitudeController;
 
@@ -13,6 +14,11 @@ namespace CameraShake
         float time;
         Vector3? sourcePosition;
         float norm;
+
+        public PerlinShake()
+        {
+
+        }
 
         /// <summary>
         /// Creates an instance of PerlinShake.
@@ -37,6 +43,19 @@ namespace CameraShake
 
         public Displacement CurrentDisplacement { get; private set; }
         public bool IsFinished { get; private set; }
+
+        public void Initialize(Params parameters,
+            float maxAmplitude = 1,
+            Vector3? sourcePosition = null,
+            bool manualStrengthControl = false)
+        {
+            pars = parameters;
+            envelope = new Envelope(pars.envelope, maxAmplitude,
+                manualStrengthControl ?
+                    Envelope.EnvelopeControlMode.Manual : Envelope.EnvelopeControlMode.Auto);
+            AmplitudeController = envelope;
+            this.sourcePosition = sourcePosition;
+        }
 
         public void Initialize(Vector3 cameraPosition, Quaternion cameraRotation)
         {
